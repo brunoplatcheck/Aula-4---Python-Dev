@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hashzap Chat</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top-bar {
+      background-color: #075E54;
+      color: #FFF;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #chat-container {
+      padding: 10px;
+      height: calc(100vh - 150px);
+      overflow-y: auto;
+    }
+
+    #chat-container p {
+      background-color: #DCF8C6;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    #input-container {
+      display: flex;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #F4F4F4;
+      padding: 10px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #input-container input[type="text"] {
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    #input-container input#username {
+      margin-right: 10px;
+      width: 30%;
+    }
+
+    #input-container input#message {
+      flex: 1;
+    }
+
+    #input-container button {
+      padding: 10px 20px;
+      background-color: #075E54;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="top-bar">
+    <h1>Hashzap</h1>
+  </div>
+
+  <div id="chat-container">
+    <p>Welcome to Hashzap Chat!</p>
+  </div>
+
+  <div id="input-container">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="text" id="message" placeholder="Type a message..." required />
+    <button id="sendBtn">Send</button>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      const socket = io("http://localhost:5000");
+
+      socket.on("connect", function () {
+        console.log("Connected to server");
+      });
+
+      socket.on("message", function (data) {
+        console.log("Received message:", data);
+        $("#chat-container").append($("<p>").text(data));
+        $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
+      });
+
+      function sendMessage() {
+        const user = $("#username").val().trim();
+        const msg = $("#message").val().trim();
+        if (user && msg) {
+          socket.send(`${user}: ${msg}`);
+          $("#message").val("");
+        }
+      }
+
+      $("#sendBtn").on("click", sendMessage);
+
+      $("#message").on("keypress", function (e) {
+        if (e.key === "Enter") {
+          sendMessage();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

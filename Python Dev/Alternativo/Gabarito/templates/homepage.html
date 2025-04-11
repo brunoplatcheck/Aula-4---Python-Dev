@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashzap Simples</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #lista_mensagens {
+            padding: 10px;
+            height: calc(100vh - 150px);
+            overflow-y: scroll;
+            background-color: #E5DDD5;
+        }
+
+        #lista_mensagens p {
+            background-color: #DCF8C6;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            width: fit-content;
+            max-width: 70%;
+        }
+
+        #input-container {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #F4F4F4;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #input-container input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        #usuario {
+            width: 20%;
+        }
+
+        #mensagem {
+            flex: 1;
+        }
+
+        #botao {
+            padding: 10px 20px;
+            background-color: #075E54;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js" integrity="sha512-Z6C1p1NIexPj5MsVUunW4pg7uMX6/TT3CUVldmjXx2kpip1eZcrAnxIusDxyFIikyM9A61zOVNgvLr/TGudOQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+    <div id="lista_mensagens">
+        <p>Bem-vindo ao Hashzap!</p>
+    </div>
+
+    <div id="input-container">
+        <input type="text" id="usuario" placeholder="Usuário" required>
+        <input type="text" id="mensagem" placeholder="Mensagem" required>
+        <button id="botao">Enviar</button>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var socket = io("localhost:5000");
+
+            socket.on("connect", function () {
+                console.log("Conectado ao servidor.");
+            });
+
+            socket.on("message", function (data) {
+                console.log("Mensagem recebida: ", data);
+                $("#lista_mensagens").append($("<p>").text(data));
+                $("#lista_mensagens").scrollTop($("#lista_mensagens")[0].scrollHeight);
+            });
+
+            function enviarMensagem() {
+                const usuario = $('#usuario').val().trim();
+                const mensagem = $('#mensagem').val().trim();
+                if (usuario && mensagem) {
+                    socket.send(`${usuario}: ${mensagem}`);
+                    $('#mensagem').val('');
+                }
+            }
+
+            $("#botao").on("click", function () {
+                enviarMensagem();
+            });
+
+            $("#mensagem").on("keypress", function (e) {
+                if (e.key === "Enter") {
+                    enviarMensagem();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
