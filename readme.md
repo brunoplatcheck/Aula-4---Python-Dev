@@ -1,111 +1,133 @@
-💬 Hashzap Chat - Documentação Completa
-Hashzap é um aplicativo de chat em tempo real multiplataforma desenvolvido com tecnologias modernas, oferecendo versões para web e desktop.
+# 💬 Hashzap Chat - Documentação Completa
 
-🌟 Recursos Principais
-Chat em tempo real com tecnologia WebSocket
+**Hashzap** é um aplicativo de chat em tempo real **multiplataforma**, desenvolvido com tecnologias modernas, oferecendo versões para **web** e **desktop (GUI)** com suporte a múltiplas salas de conversa, interface leve e integração por WebSocket.
 
-Multiplataforma: funciona no navegador e como aplicativo desktop
+---
 
-Interface moderna com temas personalizáveis
+## 🌟 Recursos Principais
 
-Sistema de salas de chat (versão Flet)
+- 🔄 Comunicação em tempo real com **WebSocket**
+- 🌐 Compatível com navegadores e como app de desktop (GUI)
+- 🎨 Interface moderna com suporte a temas personalizáveis
+- 🧩 Sistema de **salas de chat independentes** (versão Flet)
+- 🕘 Histórico de mensagens com **carimbo de data e hora**
+- 🔔 Notificações de **entrada e saída de usuários**
 
-Histórico de mensagens com carimbo de data/hora
+---
 
-Notificações de entrada/saída de usuários
+## 🛠️ Tecnologias Utilizadas
 
-🛠️ Tecnologias Utilizadas
-Backend:
+### Backend
+- [Python 3.x](https://www.python.org/)
+- [Flask](https://flask.palletsprojects.com/) — servidor web leve
+- [Flask-SocketIO](https://flask-socketio.readthedocs.io/) — comunicação em tempo real
 
-Python 3.x
+### Frontend Web
+- HTML5, CSS3
+- JavaScript (jQuery)
+- [Socket.IO](https://socket.io/) via CDN
 
-Flask (para versão web)
+### Frontend Desktop (GUI)
+- [Flet](https://flet.dev/) — biblioteca Python para UIs modernas e multiplataforma
 
-Flask-SocketIO (comunicação em tempo real)
+---
 
-Frontend:
+## 📁 Estrutura do Projeto
 
-HTML5, CSS3, JavaScript/jQuery (versão web)
+hashzap/ ├── app.py # Servidor principal Flask + Socket.IO ├── main.py # Alternativa de execução do servidor ├── templates/ │ └── index.html # Interface web principal (chat HTML + JS) ├── homepage.html # Versão alternativa da interface web ├── flet/ │ ├── hashzap.py # Versão GUI completa (com salas) │ └── codigo.py # Versão GUI simplificada └── README.md # Documentação do projeto
 
-Flet (para versão desktop - multiplataforma)
+yaml
+Copiar
+Editar
 
-📁 Estrutura do Projeto
-Copy
-hashzap/
-├── app.py                # Servidor principal Flask + Socket.IO
-├── main.py               # Alternativa do servidor
-├── templates/
-│   └── index.html        # Interface web principal
-├── homepage.html         # Versão alternativa da interface web
-├── hashzap.py            # Versão GUI completa com Flet
-├── codigo.py            # Versão Flet simplificada
-└── README.md             # Documentação do projeto
-🚀 Como Executar
-🌐 Versão Web
-Instale as dependências:
+---
 
-bash
-Copy
+## 🚀 Como Executar
+
+### 🌐 Versão Web (Flask + Socket.IO)
+
+1. Instale as dependências:
+```bash
 pip install flask flask-socketio simple-websocket
 Execute o servidor:
 
 bash
-Copy
+Copiar
+Editar
 python app.py
 Acesse no navegador:
 
-Copy
+arduino
+Copiar
+Editar
 http://localhost:5000
+💡 Você pode abrir em múltiplas abas ou em dispositivos da mesma rede.
+
 🖥️ Versão Desktop (Flet)
 Instale o Flet:
 
 bash
-Copy
+Copiar
+Editar
 pip install flet
-Execute a versão simplificada:
+Execute uma das versões:
+
+Versão simplificada:
 
 bash
-Copy
+Copiar
+Editar
 python codigo.py
-Ou a versão completa:
+Versão completa com múltiplas salas:
 
 bash
-Copy
+Copiar
+Editar
 python hashzap.py
-O aplicativo será aberto automaticamente no seu navegador padrão
+A aplicação abrirá automaticamente no seu navegador padrão.
 
-🔧 Configuração
-Portas:
+🔧 Configurações
+Portas padrão:
 
-Servidor web: 5000
+Servidor Flask: 5000
 
-Aplicativo Flet: 8000
+Aplicação Flet: 8000
 
 Personalização:
 
-Cores do tema podem ser alteradas nos arquivos hashzap.py ou index.html
+As cores podem ser alteradas nos arquivos hashzap.py (Flet) ou index.html (web).
 
-Nome do aplicativo pode ser modificado nos arquivos de interface
+O nome do aplicativo e das salas também pode ser editado diretamente no código.
 
 📌 Notas Importantes
-Para desenvolvimento local, ambos os servidores (Flask e Flet) podem ser executados simultâneamente
+É possível executar as duas versões em paralelo durante o desenvolvimento local.
 
-A versão Flet oferece recursos adicionais como:
+A versão Flet possui:
 
-Múltiplas salas de chat
+Suporte a múltiplas salas
 
-Interface mais rica
+Interface com botões, cards, layout moderno
 
-Melhor organização de mensagens
+Melhor organização do histórico de mensagens
 
-A versão web é mais simples e focada em funcionalidade básica de chat
+A versão web é focada na simplicidade e agilidade, ideal para navegadores.
 
 📄 Licença
-Este projeto é open-source e está disponível sob a licença MIT. Sinta-se à vontade para modificar e distribuir conforme suas necessidades.
+Este projeto é open-source e está licenciado sob a MIT License. Sinta-se livre para usar, estudar, modificar e distribuir conforme sua necessidade.
 
-🤝 Contribuição
-Contribuições são bem-vindas! Por favor, abra uma issue ou pull request no repositório do projeto.
+🤝 Contribuições
+Contribuições são muito bem-vindas!
+Se quiser colaborar com melhorias ou correções, por favor abra uma issue ou envie um pull request.
+
+🔗 Repositório Oficial
+https://github.com/brunoplatcheck/Aula-4---Python-Dev
 
 Divirta-se conversando! 💬🚀
 
-#
+yaml
+Copiar
+Editar
+
+---
+
+Se quiser também posso gerar uma **versão em inglês** ou criar um `logo.svg` para o cabeçalho. Deseja?
